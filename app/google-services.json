@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "756125700531",
+    "firebase_url": "https://rescue-app-627a3-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "rescue-app-627a3",
+    "storage_bucket": "rescue-app-627a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756125700531:android:1cc890c0531842d8d07bc6",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756125700531-r8kjkr18jcfbuhk0db4tbc57g0f4iek5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUuadVOkp7Dwyx7xrl0tZYIjAlgO-r794"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756125700531-0sea5ng4scc12ldenaa4eqvo401u5v4t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

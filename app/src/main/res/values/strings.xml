@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="myMapAPIKey">AIzaSyBg825DfUaNuAwEep8PjKVqP6WhDlqq7_U</string>
+    <string-array name="expertise">
+        <item>Select Expertise</item>
+        <item>Fire and urban rescue</item>
+        <item>water and Marine rescue</item>
+        <item>mountain and wilderness rescue</item>
+        <item>specialized environment rescue</item>
+        <item>air and aerial rescue</item>
+        <item>hazardous materials rescue</item>
+    </string-array>
+
+
+</resources>

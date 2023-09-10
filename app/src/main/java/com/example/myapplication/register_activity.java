@@ -108,26 +108,26 @@ public class register_activity extends AppCompatActivity {
                 userMap.put("noOfMem" , noOfMem);
                 userMap.put("expertise" , expertise);
 
-                databaseReference.child("Users").child(name).setValue(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(register_activity.this, "database Added", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(register_activity.this, "databse not added", Toast.LENGTH_SHORT).show();
-                        Log.e("FirebaseError", "Database write failed: " + e.getMessage());                    }
-                });
-
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(register_activity.this, "Enter Email Address!!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    Toast.makeText(register_activity.this, "Enter PassWord!!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                databaseReference.child("Users").child(name).setValue(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Toast.makeText(register_activity.this, "database Added", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(register_activity.this, "databse not added", Toast.LENGTH_SHORT).show();
+//                        Log.e("FirebaseError", "Database write failed: " + e.getMessage());                    }
+//                });
+//
+//                if(TextUtils.isEmpty(email)){
+//                    Toast.makeText(register_activity.this, "Enter Email Address!!", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if(TextUtils.isEmpty(password)){
+//                    Toast.makeText(register_activity.this, "Enter PassWord!!", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
 
 
 
@@ -139,6 +139,20 @@ public class register_activity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
+
+
+                                    databaseReference.child("Users").child(name).setValue(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(register_activity.this, "database Added", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(register_activity.this, "databse not added", Toast.LENGTH_SHORT).show();
+                                            Log.e("FirebaseError", "Database write failed: " + e.getMessage());                    }
+                                    });
+
 
 
 

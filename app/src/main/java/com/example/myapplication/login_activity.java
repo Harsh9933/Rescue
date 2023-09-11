@@ -86,7 +86,7 @@ public class login_activity extends AppCompatActivity {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Toast.makeText(login_activity.this, "Authentication Successful.",
                                             Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(),MapsActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                     startActivity(intent);
                                     finish();
 

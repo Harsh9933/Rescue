@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/recCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardElevation="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:id="@+id/recImage"
+            android:src="@drawable/baseline_edit_location_alt_24"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+           />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/recAddress"
+            android:text="Address"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_below="@id/recImage"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/recExpert"
+            android:text="Expertise"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_below="@id/recAddress"/>
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:id="@+id/recTitle"
+            android:text="Name"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_below="@id/recExpert"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recTitle"
+            android:layout_alignParentRight="true"
+            android:text="Send Alert"
+            android:background="@drawable/alert_button"
+            android:textColor="#fff"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+           />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -64,6 +64,21 @@
         android:layout_marginTop="10dp"/>
 
 
+    <ImageView
+        android:id="@+id/profilePic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/baseline_home_work_24"
+
+        />
+    <Button
+        android:id="@+id/selectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Image"
+        android:layout_gravity="center"
+        />
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -76,6 +91,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="Register"/>
 </LinearLayout>

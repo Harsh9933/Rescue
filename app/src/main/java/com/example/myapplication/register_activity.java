@@ -133,6 +133,9 @@ public class register_activity extends AppCompatActivity {
                 expertise = result;
 
 
+//                Intent i = new Intent(getApplicationContext() ,  MapsActivity.class);
+//                i.putExtra("Address" , address);
+//                startActivity(i);
 //
 //                HashMap<String , String> userMap = new HashMap<>();
 //

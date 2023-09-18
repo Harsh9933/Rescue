@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -47,9 +49,9 @@ public class register_activity extends AppCompatActivity {
 
     private EditText editEmail , editPass , editName , editAddress , editNoOfMem , editExpertise ;
     private Spinner myspinner;
-    private Button button,imgButton;
+    private AppCompatButton button,imgButton;
     private FirebaseAuth mAuth;
-    ProgressBar progressBar;
+    private ImageButton back;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -76,7 +78,6 @@ public class register_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        progressBar = findViewById(R.id.progressBar);
 
         editName = findViewById(R.id.name);
         editEmail  = findViewById(R.id.email);
@@ -85,10 +86,18 @@ public class register_activity extends AppCompatActivity {
         editNoOfMem = findViewById(R.id.noOfMem);
         myspinner  = (Spinner) findViewById(R.id.spinner);
 
+
+        back = findViewById(R.id.back);
         imageView = findViewById(R.id.profilePic);
         imgButton = findViewById(R.id.selectButton);
 
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         button = findViewById(R.id.registration);
         mAuth = FirebaseAuth.getInstance();
@@ -118,12 +127,13 @@ public class register_activity extends AppCompatActivity {
 
 
 
-                progressBar.setVisibility(View.VISIBLE);
                 String name , email , password ,address , noOfMem , expertise ;
 
 
                 textView = (TextView)myspinner.getSelectedView();
                 String result = textView.getText().toString();
+
+
 
                 name = String.valueOf(editName.getText());
                 email = String.valueOf(editEmail.getText());
@@ -174,7 +184,6 @@ public class register_activity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                    @Override
                                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                                       progressBar.setVisibility(View.GONE);
                                                        if (task.isSuccessful()) {
                                                            uploadImageAndRegisterUser(name, email, address, noOfMem, expertise);
                                                            Toast.makeText(register_activity.this, "database Added", Toast.LENGTH_SHORT).show();
@@ -219,7 +228,7 @@ public class register_activity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri downloadUri) {
                                     imgURL = downloadUri.toString();
-
+                                    String uid = databaseReference.child("Users").push().getKey();
                                     // Add user data to Firebase Realtime Database
                                     HashMap<String, String> userMap = new HashMap<>();
                                     userMap.put("name", name);
@@ -228,8 +237,9 @@ public class register_activity extends AppCompatActivity {
                                     userMap.put("noOfMem", noOfMem);
                                     userMap.put("expertise", expertise);
                                     userMap.put("profileImageURL", imgURL);
+                                    userMap.put("UID",uid);
 
-                                    databaseReference.child("Users").child(name).setValue(userMap)
+                                    databaseReference.child("Users").child(uid).setValue(userMap)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
@@ -258,14 +268,17 @@ public class register_activity extends AppCompatActivity {
                     });
         } else {
             // No image selected, continue with user registration without an image
+
+            String uid = databaseReference.child("Users").push().getKey();
             HashMap<String, String> userMap = new HashMap<>();
             userMap.put("name", name);
             userMap.put("email", email);
             userMap.put("address", address);
             userMap.put("noOfMem", noOfMem);
             userMap.put("expertise", expertise);
+            userMap.put("UID",uid);
 
-            databaseReference.child("Users").child(name).setValue(userMap)
+            databaseReference.child("Users").child(uid).setValue(userMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {

@@ -121,7 +121,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 }
                             } catch (IOException e) {
-                                throw new RuntimeException(e);
+                                Log.d("map","GeoCoding");
                             }
                             LatLng markerLatLng = new LatLng(lat, lon);
                             MarkerOptions marker = new MarkerOptions().position(new LatLng(lat, lon)).title("Test");

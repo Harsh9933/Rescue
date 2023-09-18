@@ -1,89 +1,45 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.UserData;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.Toast;
+
+import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
+
+
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
-    private FirebaseAuth mAuth;
+    ImageButton button , search;
+    FirebaseAuth mAuth;
     FirebaseUser user;
     BottomNavigationView nav;
-    RecyclerView recyclerView;
+//    RecyclerView recyclerView;
 //    List<DataClass> dataList;
-    DatabaseReference databaseReference;
-    ValueEventListener eventListener;
-
+//    DatabaseReference databaseReference;
+//    ValueEventListener eventListener;
+    MapsFragment mapsFragment;
+    profileFragment profileFragment;
+    chat_fragment chatFragment;
+    RecycclerFragment recycclerFragment;
+    CommunityFragment communityFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = findViewById(R.id.logOut);
+        button = findViewById(R.id.back);
+        search = findViewById(R.id.search);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-
-        recyclerView = findViewById(R.id.recyclerView);
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this,1);
-        recyclerView.setLayoutManager(gridLayoutManager);
-
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-
-        List<DataClass> userList = new ArrayList<>();
-        MyAdapter adapter = new MyAdapter(this, userList);
-        recyclerView.setAdapter(adapter);
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        dialog.show();
-        eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot  dataSnapshot) {
-                userList.clear();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    DataClass dataClass = snapshot.getValue(DataClass.class);
-
-                    userList.add(dataClass);
-                }
-                adapter.notifyDataSetChanged();
-                dialog.dismiss();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                dialog.dismiss();
-            }
-        });
 
         if(user == null){
             Intent intent = new Intent(this,login_activity.class);
@@ -91,11 +47,24 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+        mapsFragment = new MapsFragment();
+        profileFragment = new profileFragment();
+        chatFragment = new chat_fragment();
+        recycclerFragment = new RecycclerFragment();
+        communityFragment = new CommunityFragment();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(),login_activity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),SearchUserActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -107,17 +76,24 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if   (id == R.id.home) {
-                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, recycclerFragment).commit();
+
                 } else if (id == R.id.map) {
-                    Toast.makeText(MainActivity.this, "Map  ", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                    startActivity(intent);
-                    finish();
+                   getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,mapsFragment).commit();
+
+                } else if (id==R.id.community) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,communityFragment).commit();
+
+                } else if (id  == R.id.chat) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,chatFragment).commit();
+                } else if (id==R.id.profile) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profileFragment).commit();
 
                 }
                 return true;
             }
         });
+        nav.setSelectedItemId(R.id.home);
 
     }
 }

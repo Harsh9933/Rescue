@@ -7,6 +7,11 @@ public class DataClass {
     private String expertise;
     private String noOfMem;
     private String profileImageURL;
+    private String UID;
+
+    public String getUid() {
+        return UID;
+    }
 
     public String getName() {
         return name;
@@ -33,13 +38,14 @@ public class DataClass {
     }
 
 
-    public DataClass(String name, String address, String email, String expertise, String noOfMem, String profileImageURL) {
+    public DataClass(String name, String address, String email, String expertise, String noOfMem, String profileImageURL ,String UID) {
         this.name = name;
         this.address = address;
         this.email = email;
         this.expertise = expertise;
         this.noOfMem = noOfMem;
         this.profileImageURL = profileImageURL;
+        this.UID = UID;
     }
 
     public DataClass(){

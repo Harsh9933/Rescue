@@ -2,6 +2,7 @@
     <string name="app_name">My Application</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="myMapAPIKey">AIzaSyBg825DfUaNuAwEep8PjKVqP6WhDlqq7_U</string>
+    <string name="register"> <u>Register here</u>  </string>
     <string-array name="expertise">
         <item>Select Expertise</item>
         <item>Fire and urban rescue</item>
@@ -11,6 +12,8 @@
         <item>air and aerial rescue</item>
         <item>hazardous materials rescue</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -14,10 +14,10 @@
         android:layout_height="match_parent">
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="200dp"
             android:id="@+id/recImage"
             android:src="@drawable/baseline_edit_location_alt_24"
-            android:layout_marginStart="10dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:scaleType="centerCrop"
@@ -25,8 +25,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:id="@+id/recAddress"
-            android:text="Address"
+            android:id="@+id/recTitle"
+            android:text="Name"
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
@@ -40,28 +40,40 @@
             android:gravity="center_vertical"
             android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
-            android:layout_below="@id/recAddress"/>
+            android:layout_below="@id/recTitle"/>
         <TextView
             android:layout_width="120dp"
             android:layout_height="30dp"
-            android:id="@+id/recTitle"
-            android:text="Name"
+            android:id="@+id/recAddress"
+            android:text="Address"
             android:textSize="14sp"
             android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
             android:layout_below="@id/recExpert"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recTitle"
-            android:layout_alignParentRight="true"
-            android:text="Send Alert"
-            android:background="@drawable/alert_button"
-            android:textColor="#fff"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-           />
+            android:layout_below="@id/recAddress"
 
+            >
+            <ImageButton
+                android:id="@+id/sendMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_chat_bubble_24"
+                android:backgroundTint="@color/white"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send Alert"
+                android:background="@drawable/alert_button"
+                android:textColor="#fff"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+               />
+        </RelativeLayout>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

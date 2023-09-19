@@ -8,13 +8,25 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
+        android:layout_height="match_parent"
+        android:id="@+id/top_bar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_com"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
+            android:id="@+id/floatButton"
             android:layout_height="wrap_content"
-            android:text="Community"
-            android:textSize="30dp"
-            android:layout_centerInParent="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/baseline_open_in_new_24"
+            android:scaleType="center"
+            android:layout_margin="30dp"/>
+
+
     </RelativeLayout>
 
 </FrameLayout>

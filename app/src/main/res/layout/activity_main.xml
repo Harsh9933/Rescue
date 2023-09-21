@@ -7,14 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/top_bar"
-        android:background="@drawable/nav_bg">
+        android:background="#101b5e">
 
         <ImageButton
             android:id="@+id/back"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:scaleType="fitCenter"
-            android:backgroundTint="#0079FF"
+            android:backgroundTint="#101b5e"
             app:tint="@color/white"
             android:contentDescription="logout"
             android:src="@drawable/logout_icon" />
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/search"
-            android:backgroundTint="#0079FF"
+            android:backgroundTint="#101b5e"
             app:tint="@color/white"
             android:layout_alignParentRight="true"
 
@@ -39,6 +39,7 @@
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
+        android:background="@drawable/bgvectorsblue"
         android:layout_height="match_parent"
         android:layout_below="@id/top_bar"
         android:layout_above="@id/nav_bar">
@@ -55,8 +56,9 @@
         android:layout_alignParentBottom="true"
         app:itemIconSize="30dp"
         app:itemIconTint="@color/white"
+        app:itemTextColor="#6BCCCD"
         app:menu="@menu/menu_list"
-        android:background="@drawable/nav_bg"
+        android:background="#101b5e"
         />
 
 

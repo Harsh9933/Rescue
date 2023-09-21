@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/bgvectors"
+    android:background="@drawable/bgvectorsblue"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,20 +12,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/top_bar"
-            android:background="@drawable/top_bar">
+            android:background="#101b5e">
 
             <ImageButton
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_arrow_back_ios_24"
-                android:backgroundTint="#F49D36"
+                android:backgroundTint="#101b5e"
                 android:contentDescription="back" />
 
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="Registration"
+               android:textColor="#ffff"
                android:layout_toRightOf="@id/back"
                android:layout_centerVertical="true"
                android:textSize="20dp"
@@ -113,7 +114,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/profile_bg"
+                android:background="@color/black"
                 android:src="@drawable/baseline_home_work_24"
 
                 />

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -84,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id==R.id.community) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,communityFragment).commit();
 
-                } else if (id  == R.id.chat) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,chatFragment).commit();
+//                } else if (id  == R.id.chat) {
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,chatFragment).commit();
                 } else if (id==R.id.profile) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profileFragment).commit();
 

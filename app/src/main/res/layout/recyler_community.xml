@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
+    android:background="@drawable/community_recbg"
     android:layout_width="match_parent">
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/com_profile"
@@ -9,7 +10,10 @@
         android:layout_height="300dp"/>
     <TextView
         android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:layout_marginLeft="17dp"
+        android:textSize="17dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/com_profile"
-        android:text="caption"/>
+        android:text="Caption"/>
 </RelativeLayout>

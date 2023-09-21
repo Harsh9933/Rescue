@@ -11,7 +11,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#101b5e">
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -27,6 +28,7 @@
             android:layout_height="30dp"
             android:id="@+id/recTitle"
             android:text="Name"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
@@ -35,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:id="@+id/recExpert"
+            android:textColor="@color/white"
             android:text="Expertise"
             android:textSize="15sp"
             android:gravity="center_vertical"
@@ -47,6 +50,7 @@
             android:id="@+id/recAddress"
             android:text="Address"
             android:textSize="14sp"
+            android:textColor="@color/white"
             android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
             android:layout_below="@id/recExpert"/>
@@ -61,18 +65,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_chat_bubble_24"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="#101b5e"
                 />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send Alert"
-                android:background="@drawable/alert_button"
-                android:textColor="#fff"
                 android:layout_alignParentRight="true"
+               android:layout_marginBottom="5dp"
+                android:background="@drawable/alert_button"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-               />
+                android:text="Send Alert"
+                android:textSize="15dp"
+                android:textColor="#fff" />
         </RelativeLayout>
     </RelativeLayout>
 

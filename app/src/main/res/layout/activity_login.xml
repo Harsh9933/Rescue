@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bgvectors"
+    android:background="@drawable/bgvectorsblue"
     tools:context=".login_activity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/firefight"/>
+        android:src="@drawable/firefightblue"/>
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:text="Don’t have account?"
             android:textSize="15sp"
+            android:textColor="#ffff"
             android:layout_marginLeft="55dp"/>
         <TextView
             android:layout_width="wrap_content"

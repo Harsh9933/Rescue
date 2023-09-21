@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.myapplication.adapter.MyAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +34,10 @@ public class RecycclerFragment extends Fragment {
     ValueEventListener eventListener;
     FirebaseUser user;
     private FirebaseAuth mAuth;
+    SearchView searchView;
+    List<DataClass> userList;
+    MyAdapter adapter;
+
 
 
 
@@ -51,6 +57,24 @@ public class RecycclerFragment extends Fragment {
 
         user = mAuth.getCurrentUser();
 
+        searchView = view.findViewById(R.id.searchView);
+        searchView.clearFocus();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterItem(newText);
+                return false;
+            }
+
+
+        });
+
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(),1);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -63,8 +87,8 @@ public class RecycclerFragment extends Fragment {
         dialog.show();
 
 
-        List<DataClass> userList = new ArrayList<>();
-        MyAdapter adapter = new MyAdapter(requireContext(), userList);
+        userList = new ArrayList<>();
+        adapter = new MyAdapter(requireContext(), userList);
         recyclerView.setAdapter(adapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -92,5 +116,20 @@ public class RecycclerFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void filterItem(String newText) {
+        List<DataClass> filteredList = new ArrayList<>();
+        for(DataClass data : userList){
+            if(data.getName().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(data);
+            }
+        }
+
+        if(filteredList.isEmpty()){
+            Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilterdList(filteredList);
+        }
     }
 }

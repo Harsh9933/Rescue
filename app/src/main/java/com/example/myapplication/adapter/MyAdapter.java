@@ -24,6 +24,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
     private Context context;
     private List<DataClass> dataList;
 
+
+    public void setFilterdList(List<DataClass> filterdList){
+        this.dataList = filterdList;
+        notifyDataSetChanged();
+
+    }
     public MyAdapter(Context context, List<DataClass> dataList) {
         this.context = context;
         this.dataList = dataList;

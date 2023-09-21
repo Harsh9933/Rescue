@@ -3,13 +3,22 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,6 +26,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +41,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 public class register_activity extends AppCompatActivity {
 
@@ -42,6 +56,8 @@ public class register_activity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     public static final int PICK_IMAGE_REQUEST = 1;
+    Button getLocation;
+    FusedLocationProviderClient fusedLocationProviderClient;
 
     TextView textView;
     ImageView imageView;
@@ -73,11 +89,22 @@ public class register_activity extends AppCompatActivity {
         editNoOfMem = findViewById(R.id.noOfMem);
         myspinner  = (Spinner) findViewById(R.id.spinner);
 
+        getLocation = findViewById(R.id.getLocation);
+
 
         back = findViewById(R.id.back);
         imageView = findViewById(R.id.profilePic);
         imgButton = findViewById(R.id.selectButton);
 
+
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        getLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLocation();
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,6 +217,54 @@ public class register_activity extends AppCompatActivity {
         });
     }
 
+    private void getLocation() {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            Geocoder geocoder = new Geocoder(register_activity.this, Locale.getDefault());
+                            double latitude = location.getLatitude();
+                            double longitude = location.getLongitude();
+                            Log.d("Location", "Latitude: " + latitude + ", Longitude: " + longitude);
+                            List<Address> address = null;
+                            try {
+                                address = geocoder.getFromLocation(latitude, longitude, 1);
+                                editAddress.setText(address.get(0).getAddressLine(0));
+                            } catch (IOException e) {
+                                Log.e("Current Location", "Error");
+                            }
+
+                        }
+                }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Location","NO last location");
+                    }
+                });
+        }else {
+            askPermission();
+        }
+    }
+
+    private void askPermission() {
+        ActivityCompat.requestPermissions(register_activity.this, new String[]
+                {Manifest.permission.ACCESS_FINE_LOCATION},100);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if(requestCode == 100){
+            if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                getLocation();
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -197,6 +272,8 @@ public class register_activity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uri = data.getData();
             imageView.setImageURI(uri);
+        }else {
+            Toast.makeText(this, "required permission", Toast.LENGTH_SHORT).show();
         }
     }
 

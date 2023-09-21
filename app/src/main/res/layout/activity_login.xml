@@ -7,10 +7,11 @@
     android:orientation="vertical"
     android:background="@drawable/bgvectorsblue"
     tools:context=".login_activity">
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/firefightblue"/>
+        android:layout_height="317dp"
+        android:src="@drawable/firefightblue" />
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"

@@ -1,8 +1,16 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Rescue</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="myMapAPIKey">AIzaSyBg825DfUaNuAwEep8PjKVqP6WhDlqq7_U</string>
     <string name="register"> <u>Register here</u>  </string>
+
+    <string name="str_label_btn_send">Send</string>
+    <string name="str_menu_search_devices">Search Devices</string>
+    <string name="str_menu_bluetooth_on">Switch on Bluetooth</string>
+
+    <string name="str_paired_devices">Paired Devices</string>
+    <string name="str_available_devices">Available Devices</string>
+    <string name="str_menu_scan_devices">Scan Devices</string>
     <string-array name="expertise">
         <item>Select Expertise</item>
         <item>Fire and urban rescue</item>

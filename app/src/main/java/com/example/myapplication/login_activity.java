@@ -3,9 +3,11 @@ package com.example.myapplication;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -56,9 +58,8 @@ public class login_activity extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),register_activity.class);
-                startActivity(intent);
-                finish();
+                showAlertDialog();
+
             }
         });
 
@@ -102,5 +103,31 @@ public class login_activity extends AppCompatActivity {
                         });
             }
         });
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Registration").setMessage("DO YOU WANT TO REGISTER AS AN USER OR AGENCY");
+        builder.setPositiveButton("User", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(),user_registration.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        builder.setNegativeButton("Agency", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(),register_activity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

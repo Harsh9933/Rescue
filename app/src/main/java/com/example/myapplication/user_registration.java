@@ -7,7 +7,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -46,23 +45,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class register_activity extends AppCompatActivity {
+public class user_registration extends AppCompatActivity {
 
-    private EditText editEmail , editPass , editName , editAddress , editNoOfMem , editphoneNum ;
-    private Spinner myspinner;
+    private EditText editEmail , editPass , editName , editAddress;
     private AppCompatButton button,imgButton;
     private FirebaseAuth mAuth;
     private ImageButton back;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
+    ImageView imageView;
+    String imgURL;
+    Uri uri;
     public static final int PICK_IMAGE_REQUEST = 1;
     Button getLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
 
-    TextView textView;
-    ImageView imageView;
-    String imgURL;
-    Uri uri;
+
 
     @Override
     public void onStart() {
@@ -75,22 +73,20 @@ public class register_activity extends AppCompatActivity {
             finish();
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_user_registration);
 
 
-        editName = findViewById(R.id.name);
-        editEmail  = findViewById(R.id.email);
-        editPass = findViewById(R.id.password);
-        editAddress = findViewById(R.id.address);
-        editNoOfMem = findViewById(R.id.noOfMem);
-        editphoneNum = findViewById(R.id.phoneNum);
-        myspinner  = (Spinner) findViewById(R.id.spinner);
+        editName = findViewById(R.id.username);
+        editEmail  = findViewById(R.id.useEmail);
+        editPass = findViewById(R.id.userpassword);
+        editAddress = findViewById(R.id.useraddress);
 
-        getLocation = findViewById(R.id.getLocation);
+
+
+        getLocation = findViewById(R.id.usergetLocation);
 
 
         back = findViewById(R.id.back);
@@ -130,10 +126,6 @@ public class register_activity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.expertise));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        myspinner.setAdapter(myAdapter);
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,11 +134,8 @@ public class register_activity extends AppCompatActivity {
 
 
 
-                String name , email , password ,address , noOfMem , expertise , phonNumber;
+                String name , email , password ,address ;
 
-
-                textView = (TextView)myspinner.getSelectedView();
-                String result = textView.getText().toString();
 
 
 
@@ -154,27 +143,22 @@ public class register_activity extends AppCompatActivity {
                 email = String.valueOf(editEmail.getText());
                 password = String.valueOf(editPass.getText());
                 address = String.valueOf(editAddress.getText());
-                noOfMem = String.valueOf(editNoOfMem.getText());
-                phonNumber = String.valueOf(editphoneNum.getText());
-                expertise = result;
-
-
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                   @Override
-                                                   public void onComplete(@NonNull Task<AuthResult> task) {
-                                                       if (task.isSuccessful()) {
-                                                           uploadImageAndRegisterUser(name, email, address, noOfMem, expertise , phonNumber);
-                                                           Toast.makeText(register_activity.this, "database Added", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    uploadImageAndRegisterUser(name, email, address);
+                                    Toast.makeText(user_registration.this, "database Added", Toast.LENGTH_SHORT).show();
 
 //                                    databaseReference.child("Users").child(name).setValue(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                       } else {
-                                                           Log.d("mine", "Account Registration Failed");
-                                                           Toast.makeText(register_activity.this, "Account Registration Failed", Toast.LENGTH_SHORT).show();
-                                                       }
-                                                   }
-                                               });
+                                } else {
+                                    Log.d("mine", "Account Registration Failed");
+                                    Toast.makeText(user_registration.this, "Account Registration Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
 
 
@@ -182,40 +166,39 @@ public class register_activity extends AppCompatActivity {
             }
         });
     }
-
     private void getLocation() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if (location != null) {
-                            Geocoder geocoder = new Geocoder(register_activity.this, Locale.getDefault());
-                            double latitude = location.getLatitude();
-                            double longitude = location.getLongitude();
-                            Log.d("Location", "Latitude: " + latitude + ", Longitude: " + longitude);
-                            List<Address> address = null;
-                            try {
-                                address = geocoder.getFromLocation(latitude, longitude, 1);
-                                editAddress.setText(address.get(0).getAddressLine(0));
-                            } catch (IOException e) {
-                                Log.e("Current Location", "Error");
-                            }
-
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        Geocoder geocoder = new Geocoder(user_registration.this, Locale.getDefault());
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+                        Log.d("Location", "Latitude: " + latitude + ", Longitude: " + longitude);
+                        List<Address> address = null;
+                        try {
+                            address = geocoder.getFromLocation(latitude, longitude, 1);
+                            editAddress.setText(address.get(0).getAddressLine(0));
+                        } catch (IOException e) {
+                            Log.e("Current Location", "Error");
                         }
-                }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("Location","NO last location");
+
                     }
-                });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e("Location","NO last location");
+                }
+            });
         }else {
             askPermission();
         }
     }
 
     private void askPermission() {
-        ActivityCompat.requestPermissions(register_activity.this, new String[]
+        ActivityCompat.requestPermissions(user_registration.this, new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION},100);
     }
 
@@ -230,7 +213,6 @@ public class register_activity extends AppCompatActivity {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -242,8 +224,7 @@ public class register_activity extends AppCompatActivity {
             Toast.makeText(this, "required permission", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private void uploadImageAndRegisterUser(String name, String email, String address, String noOfMem, String expertise ,String phoneNum) {
+    private void uploadImageAndRegisterUser(String name, String email, String address) {
         if (uri != null) {
             StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("profile_images");
             String imageName = name + "_profile.jpg";
@@ -258,23 +239,20 @@ public class register_activity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri downloadUri) {
                                     imgURL = downloadUri.toString();
-                                    String uid = databaseReference.child("Users").push().getKey();
+                                    String uid = databaseReference.child("consumer").push().getKey();
                                     // Add user data to Firebase Realtime Database
                                     HashMap<String, String> userMap = new HashMap<>();
                                     userMap.put("name", name);
                                     userMap.put("email", email);
                                     userMap.put("address", address);
-                                    userMap.put("noOfMem", noOfMem);
-                                    userMap.put("expertise", expertise);
-                                    userMap.put("phoneNumber", phoneNum);
                                     userMap.put("profileImageURL", imgURL);
                                     userMap.put("UID",uid);
 
-                                    databaseReference.child("Users").child(uid).setValue(userMap)
+                                    databaseReference.child("consumer").child(uid).setValue(userMap)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    Toast.makeText(register_activity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(user_registration.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                                                     Intent intent = new Intent(getApplicationContext(), login_activity.class);
                                                     startActivity(intent);
                                                     finish();
@@ -283,7 +261,7 @@ public class register_activity extends AppCompatActivity {
                                             .addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(register_activity.this, "Database write failed", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(user_registration.this, "Database write failed", Toast.LENGTH_SHORT).show();
                                                     Log.e("FirebaseError", "Database write failed: " + e.getMessage());
                                                 }
                                             });
@@ -294,27 +272,24 @@ public class register_activity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(register_activity.this, "Image upload failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(user_registration.this, "Image upload failed.", Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
             // No image selected, continue with user registration without an image
 
-            String uid = databaseReference.child("Users").push().getKey();
+            String uid = databaseReference.child("consumer").push().getKey();
             HashMap<String, String> userMap = new HashMap<>();
             userMap.put("name", name);
             userMap.put("email", email);
             userMap.put("address", address);
-            userMap.put("noOfMem", noOfMem);
-            userMap.put("expertise", expertise);
-            userMap.put("phoneNumber", phoneNum);
             userMap.put("UID",uid);
 
-            databaseReference.child("Users").child(uid).setValue(userMap)
+            databaseReference.child("consumer").child(uid).setValue(userMap)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(register_activity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(user_registration.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), login_activity.class);
                             startActivity(intent);
                             finish();
@@ -323,12 +298,10 @@ public class register_activity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(register_activity.this, "Database write failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(user_registration.this, "Database write failed", Toast.LENGTH_SHORT).show();
                             Log.e("FirebaseError", "Database write failed: " + e.getMessage());
                         }
                     });
         }
     }
 }
-
-

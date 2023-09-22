@@ -7,7 +7,12 @@ public class DataClass {
     private String expertise;
     private String noOfMem;
     private String profileImageURL;
+    private String phoneNum;
     private String UID;
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
 
     public String getUid() {
         return UID;

@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id==R.id.community) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,communityFragment).commit();
 
-//                } else if (id  == R.id.chat) {
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,chatFragment).commit();
+                } else if (id  == R.id.chat) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,chatFragment).commit();
                 } else if (id==R.id.profile) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profileFragment).commit();
 

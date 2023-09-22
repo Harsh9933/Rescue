@@ -12,10 +12,10 @@
         android:id="@+id/community"
         android:title="Community"
         android:icon="@drawable/baseline_groups_2_24"/>
-<!--    <item-->
-<!--        android:id="@+id/chat"-->
-<!--        android:title="Chat"-->
-<!--        android:icon="@drawable/baseline_chat_bubble_24"/>-->
+    <item
+        android:id="@+id/chat"
+        android:title="Chat"
+        android:icon="@drawable/baseline_chat_bubble_24"/>
     <item
         android:id="@+id/profile"
         android:title="Proflie"

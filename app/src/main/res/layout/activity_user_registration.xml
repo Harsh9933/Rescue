@@ -22,19 +22,19 @@
                 android:backgroundTint="#101b5e"
                 android:contentDescription="back" />
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Registration"
-               android:textColor="#ffff"
-               android:layout_toRightOf="@id/back"
-               android:layout_centerVertical="true"
-               android:textSize="20dp"
-               android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registration"
+                android:textColor="#ffff"
+                android:layout_toRightOf="@id/back"
+                android:layout_centerVertical="true"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/username"
             android:hint="NAME"
             android:layout_width="match_parent"
             android:layout_height="50sp"
@@ -46,7 +46,7 @@
             android:layout_marginTop="30dp"
             />
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/useEmail"
             android:hint="Email"
             android:layout_width="match_parent"
             android:layout_height="50sp"
@@ -57,7 +57,7 @@
             android:paddingBottom="2dp"
             android:layout_marginTop="30dp"/>
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/userpassword"
             android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="50sp"
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/address"
+                android:id="@+id/useraddress"
                 android:hint="Address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,12 +82,12 @@
                 android:layout_marginStart="50dp"
                 android:paddingBottom="2dp"
                 android:layout_marginTop="30dp"
-                android:layout_toStartOf="@id/getLocation"
+                android:layout_toStartOf="@id/usergetLocation"
                 android:layout_alignParentStart="true"
                 android:minLines="3"
                 />
             <Button
-                android:id="@+id/getLocation"
+                android:id="@+id/usergetLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GEt"
@@ -97,41 +97,9 @@
                 android:layout_centerVertical="false"
                 android:gravity="center"/>
         </RelativeLayout>
-        <EditText
-            android:id="@+id/noOfMem"
-            android:hint="Number of members"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:background="@drawable/cardbg"
-            android:textAlignment="center"
-            android:layout_marginHorizontal="50dp"
-            android:elevation="10dp"
-            android:paddingBottom="2dp"
-            android:layout_marginTop="30dp"/>
-        <EditText
-            android:id="@+id/phoneNum"
-            android:hint="phoneNum"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:background="@drawable/cardbg"
-            android:textAlignment="center"
-            android:layout_marginHorizontal="50dp"
-            android:elevation="10dp"
-            android:paddingBottom="2dp"
-            android:layout_marginTop="30dp"/>
 
 
-        <Spinner
-            android:id="@+id/spinner"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:background="@drawable/cardbg"
-            android:textAlignment="center"
-            android:layout_marginHorizontal="50dp"
-            android:elevation="10dp"
-            android:paddingBottom="2dp"
-            android:layout_marginTop="30dp"/>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -162,6 +130,7 @@
 
 
         </RelativeLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registration"
             android:layout_width="match_parent"

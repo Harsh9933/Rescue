@@ -54,6 +54,7 @@ public class login_activity extends AppCompatActivity {
         button  = findViewById(R.id.login);
         reg  = findViewById(R.id.reg);
         mAuth = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progBAR);
 
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +67,7 @@ public class login_activity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 String email , password;
                 email = String.valueOf(editEmail.getText());
                 password = String.valueOf(editPass.getText());
@@ -86,6 +88,7 @@ public class login_activity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(login_activity.this, "Authentication Successful.",
                                             Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);

@@ -11,9 +11,13 @@
         android:id="@+id/top_bar"
         android:background="#101b5e">
 
-
-
-
+        <ImageButton
+            android:id="@+id/backbt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            android:backgroundTint="#101b5e"
+            android:contentDescription="logout" />
 
         <ImageButton
             android:id="@+id/scan"
@@ -29,6 +33,7 @@
 
     </RelativeLayout>
 
+
     <ProgressBar
         android:id="@+id/progress_scan_devices"
         android:layout_width="25dp"
@@ -39,16 +44,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:text="@string/str_paired_devices" />
 
     <ListView
         android:id="@+id/list_paired_devices"
         android:layout_width="match_parent"
+        android:background="#BCE5EA"
         android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:text="@string/str_available_devices" />
 
     <ListView

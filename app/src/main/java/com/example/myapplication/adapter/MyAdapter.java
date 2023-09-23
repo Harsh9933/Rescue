@@ -83,6 +83,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 if (position != RecyclerView.NO_POSITION) {
                     String uid = dataList.get(position).getUid();
                     sendAlertToUser(uid);
+                    Log.d("alert", "onClick: " + uid);
                 }
             }
         });
@@ -133,7 +134,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private void sendAlertToUser(String uid) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
-                    "2",
+                    "3452",
                     "Channel Name",
                     NotificationManager.IMPORTANCE_DEFAULT
             );
@@ -141,8 +142,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
             notificationManager.createNotificationChannel(channel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "2")
-                .setSmallIcon(R.drawable.ic_launcher_foreground) // Change to your desired icon
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "3452")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Alert")
                 .setContentText("You've received an alert!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);

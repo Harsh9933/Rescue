@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class register_activity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     public static final int PICK_IMAGE_REQUEST = 1;
+    ProgressBar progressBar;
     Button getLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -89,7 +91,7 @@ public class register_activity extends AppCompatActivity {
         editNoOfMem = findViewById(R.id.noOfMem);
         editphoneNum = findViewById(R.id.phoneNum);
         myspinner  = (Spinner) findViewById(R.id.spinner);
-
+        progressBar = findViewById(R.id.progregBAR);
         getLocation = findViewById(R.id.getLocation);
 
 
@@ -117,7 +119,7 @@ public class register_activity extends AppCompatActivity {
         button = findViewById(R.id.registration);
         mAuth = FirebaseAuth.getInstance();
 
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference  = firebaseDatabase.getReference();
 
@@ -138,8 +140,7 @@ public class register_activity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                progressBar.setVisibility(View.VISIBLE);
 
 
                 String name , email , password ,address , noOfMem , expertise , phonNumber;
@@ -166,6 +167,7 @@ public class register_activity extends AppCompatActivity {
                                                    public void onComplete(@NonNull Task<AuthResult> task) {
                                                        if (task.isSuccessful()) {
                                                            uploadImageAndRegisterUser(name, email, address, noOfMem, expertise , phonNumber);
+                                                           progressBar.setVisibility(View.GONE);
                                                            Toast.makeText(register_activity.this, "database Added", Toast.LENGTH_SHORT).show();
 
 //                                    databaseReference.child("Users").child(name).setValue(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {

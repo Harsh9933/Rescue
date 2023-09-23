@@ -35,6 +35,7 @@ public class DeviceListActivity extends AppCompatActivity {
     private ListView listPairedDevices, listAvailableDevices;
     private ProgressBar progressScanDevices;
     ImageButton scan;
+    ImageButton back;
     LocationManager locationManager;
 
 
@@ -58,6 +59,8 @@ public class DeviceListActivity extends AppCompatActivity {
 
         scan = findViewById(R.id.scan);
 
+        back = findViewById(R.id.backbt);
+
         adapterPairedDevices = new ArrayAdapter<String>(context, R.layout.device_list_item);
         adapterAvailableDevices = new ArrayAdapter<String>(context, R.layout.device_list_item);
 
@@ -74,6 +77,13 @@ public class DeviceListActivity extends AppCompatActivity {
                 intent.putExtra("deviceAddress", address);
                 setResult(RESULT_OK, intent);
                 finish();
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
         scan.setOnClickListener(new View.OnClickListener() {

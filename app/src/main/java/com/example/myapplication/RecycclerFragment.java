@@ -91,7 +91,7 @@ public class RecycclerFragment extends Fragment {
         adapter = new MyAdapter(requireContext(), userList);
         recyclerView.setAdapter(adapter);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");

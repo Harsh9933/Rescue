@@ -35,7 +35,12 @@
         android:layout_gravity="center_horizontal"
         android:textAlignment="center"
         android:paddingBottom="9dp"/>
-
+    <ProgressBar
+        android:id="@+id/progBAR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login"
         android:layout_width="match_parent"
